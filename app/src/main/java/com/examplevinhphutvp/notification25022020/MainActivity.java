@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 .setContentTitle("Có thông báo mới")
                 .setContentText("Bạn nhận được thông báo có version mới cho app")
                 .setWhen(System.currentTimeMillis())
+                .setContentIntent(pendingIntent)
                 .setStyle(new NotificationCompat.BigPictureStyle()
                         .bigPicture(
                                 BitmapFactory.decodeResource(
