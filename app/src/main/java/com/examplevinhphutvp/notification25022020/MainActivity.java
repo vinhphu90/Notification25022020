@@ -8,6 +8,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private void CreateNotification() {
         //Intent : thao tac voi Notification
         Intent intent = new Intent(this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(
                         this,
@@ -65,12 +68,16 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             CharSequence Name = "Notification";
             NotificationChannel notificationChannel =
-                    new NotificationChannel(CHANNEL_ID,Name,NotificationManager.IMPORTANCE_LOW);
+                    new NotificationChannel(
+                            CHANNEL_ID,
+                            Name,
+                            NotificationManager.IMPORTANCE_LOW);
             // chế độ rung
             notificationChannel.enableVibration(true);
             notificationManager.createNotificationChannel(notificationChannel);
         }
-
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        build.setSound(alarmSound);
         notificationManager.notify(mNotificationID,build.build());
     }
 }
